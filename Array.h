@@ -1,9 +1,13 @@
+#include <cstring>
+#include <iostream>
+using namespace std;
 class Array
 {
   private:
-    string *words
-    int *wordcounter
+    string *words;
+    int *wordcounter;
     int size;
+    bool moremem(int);
   public:
     Array();
 
