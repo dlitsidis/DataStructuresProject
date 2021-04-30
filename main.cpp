@@ -2,6 +2,7 @@
 #include <cstring>
 #include <fstream>
 #include <stdlib.h>
+#include "Array.h"
 using namespace std;
 
 bool removeSpecialChars(string& a)
@@ -31,7 +32,7 @@ int main()
    int i=0,size=0;
    words=nullptr;
    ifstream ifs;
-   ifs.open("b.txt");
+   ifs.open("a.txt");
    if(ifs.is_open())
    {
       while(ifs>>a)
@@ -50,6 +51,8 @@ int main()
    {
     cout<<"File Error!"<<endl;
    }
+   Array pap;
    for(int j=0;j<i;j++)
-     cout<<words[j]<<endl;
+     pap.insert(words[j]); 
+    
 }  
