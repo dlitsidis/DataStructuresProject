@@ -2,19 +2,19 @@
 
 Array::Array()
 {
-   words=nullptr;
+   words=new string[245000];
    wordcounter=nullptr;
    size=0;
 }
 
 void Array::insert(string a)
 {
-  if(moremem(sizeof(string)*(size+1)))
+  if(uniqueString(a))
   {
    words[size]=a;
    size++;
+   cout<<size<<"."<<words[size-1]<<endl;
   }
-  cout<<words[20]<<endl;
 }
 
 void Array::remove(string a)
@@ -47,5 +47,13 @@ bool Array::moremem(int mem)
   }
   delete [] words;
   words=temp;
+  return true;
+}
+
+bool Array::uniqueString(string a)
+{
+  for(int i=0;i<size;i++)
+    if(a==words[i])
+      return false;
   return true;
 }
