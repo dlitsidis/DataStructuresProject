@@ -32,7 +32,7 @@ int main()
    int i=0,size=0;
    words=nullptr;
    ifstream ifs;
-   ifs.open("a.txt");
+   ifs.open("Project.txt");
    if(ifs.is_open())
    {
       while(ifs>>a)
@@ -53,6 +53,5 @@ int main()
    }
    Array pap;
    for(int j=0;j<i;j++)
-     pap.insert(words[j]); 
-    
+     pap.insert(words[j]);
 }  
