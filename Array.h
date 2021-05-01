@@ -8,6 +8,7 @@ class Array
     int *wordcounter;
     int size;
     bool moremem(int);
+    bool uniqueString(string);
   public:
     Array();
 
