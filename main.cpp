@@ -3,7 +3,14 @@
 #include <fstream>
 #include <stdlib.h>
 #include "Array.h"
+#include "Sorted.h"
+#include "BinaryTree.h"
+#include <chrono>
+#include <cstdlib>
+#include <unistd.h>
+
 using namespace std;
+using namespace std::chrono;
 
 bool removeSpecialChars(string& a) //συνάρτηση που δέχεται με αναφορά ως όρισμα τις λέξεις του αρχείου και αφαιρεί τους ειδικούς χαρακτήρες
 {
@@ -26,24 +33,24 @@ bool removeSpecialChars(string& a) //συνάρτηση που δέχεται μ
     return true;              //αποθήκευση. Ειδάλλως επιστρέφουμε true.
 }
 
-bool readFile(string filename,string* &words,int &i)
+bool readFile(string filename,string* &words,int &i)//συνάρτηση που δέχεται ως όρισμα μια συμβολοσειρά που ειναι το ονομα του αρχειου που θα ανοίξουμε εναν δυναμικο πινακα με αναφορα στον οποιο αποθηκευουμε το αρχειο καθως και εναν ακεραιο με αναφορα στον οποιο αποθηκευουμε το μεγεθος του πινακα
 {
    string a;
    int size=0;
-   i=0;
+   i=0;//αρχικοποιει το μεγεθος του πινακα
    words=nullptr;
    ifstream ifs;
    ifs.open(filename);
-   if(ifs.is_open())
+   if(ifs.is_open())//τσεκαρει αν μπορεσε να ανοιξει σωστα το αρχειο
    {
       while(ifs>>a)
       {
-        if(removeSpecialChars(a))
+        if(removeSpecialChars(a))//διαγραφει ολους του ειδικους χαρακτηρες απο καθε λεξη και μετα την αποθηκευει στον πινακα
         {
           size+=sizeof(a);
           words=(string *)realloc(words,size);
           words[i]=a;
-          i++; 
+          i++;//αυξανουμε τον counter που μας λεει ποσα στοιχεια εχει ο πινακας
         }
       }
       ifs.close();
@@ -63,10 +70,39 @@ int main()
   readFile("Project.txt",words,size);
 
   Array unsorted;
+  Sorted sor;
+  BinaryTree bt;
   for(int i=0;i<size;i++)
     unsorted.insert(words[i]);
-  for(int i=0;i<50;i++)
-    cout<<"The word "<<words[i]<<" was found "<<unsorted.search(words[i])<<" times"<<endl;
+  for(int i=0;i<size;i++)
+     sor.insert(words[i]);
+  for(int i=0;i<sor.getSize();i++)
+    cout<<i+1<<": "<<sor[i]<<" "<<sor.search(sor[i])<<endl;
+   //for(int i=0;i<size;i++)
+     //bt.insert(words[i]);
+   
+
+   //bt.printPreOrder();
+   //cout<<endl<<endl;
+   //bt.printPreOrder();
+   //cout<<endl<<endl;
+   //bt.printInOrder();
+
+   /*auto start = high_resolution_clock::now();
+  for(int i=0;i<size-1;i++)
+    int p=sor.search(words[i]);
+  auto stop = high_resolution_clock::now();
+  auto duration = duration_cast<milliseconds>(stop - start);
+  cout <<"Search lasted: "<<duration.count()<<" milliseconds"<<endl;*/
+
+  
+
+ /* auto start2 = high_resolution_clock::now();
+   for(int i=0;i<size-1;i++)
+     int p=sor.search(words[i]);
+  auto stop2 = high_resolution_clock::now();
+  auto duration2 = duration_cast<milliseconds>(stop2 - start2);
+  cout <<"Search lasted: "<<duration2.count()<<" milliseconds"<<endl;*/
+   
+
 }  
-
-
