@@ -78,3 +78,18 @@ int Array::linearsearch(string a)
       return i;
     return -1;
 }
+
+int Array::getSize()
+{
+  return size;
+}
+
+string& Array::operator[](int pos)
+{
+  return words[pos];
+}
+
+int Array::getwc(int i)
+{
+  return wordcounter[i];
+}
