@@ -39,14 +39,17 @@ class BinaryTree
      node* root=new node();
 
      void printPostOrder(node *);
-      void printInOrder(node *);
+     void printInOrder(node *);
      void printPreOrder(node *);
+     node* search(node*,string);
+     node* remove(node*,string);
+     node* min(node*);
    public:
      BinaryTree();
 
      void insert(string);
-     void remove();
-     node* search(node*,string);
+     bool remove(string);
+     bool search(string);
 
      void printPostOrder();
      void printInOrder();
