@@ -99,7 +99,7 @@ void Sorted::insertS(string element_to_insert)
      wordcounter[i+1]=wordcounter[i];
   }
   words[a]=element_to_insert;
-  wordcounter[a]++;
+  wordcounter[a]=1;
   size++;
 }
 
