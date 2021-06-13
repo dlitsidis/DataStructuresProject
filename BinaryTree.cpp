@@ -1,7 +1,8 @@
-#include "BinaryTree.h"
+#include "BinaryTree.hpp"
 
 BinaryTree::BinaryTree()
 {
+  //αρχικοποίηση της ρίζας του δέντρου και των παιδιών του σε δείκτη nullptr
   root->leftchild=nullptr;
   root->rightchild=nullptr;
   root=nullptr;
@@ -20,8 +21,8 @@ void BinaryTree::insert(string a)
 
 bool BinaryTree::insertNode(node* root,string value)
 {
-    if(value==root->data.value)
-    {
+    if(value==root->data.value) //αν το στοιχείο που προσπαθούμε να εισάγουμε υπάρχει ήδη, τότε αυξάνουμε το
+    {                           //πλήθος εμφανίσεων στο struct data
       root->data.counter++;
       return false;
     }
@@ -46,16 +47,17 @@ bool BinaryTree::insertNode(node* root,string value)
     return true;
 }
     
+//αναδρομική συνάρτηση για αναζήτηση στοιχείου σε δυαδικό δέντρο
 node* BinaryTree::search(node* root, string key)
 {
     if (root == nullptr || root->data.value == key)
        return root;
     
-    if (root->data.value< key)
+    if (root->data.value< key) //λόγω της σύμβασης πως το δεξί παιδί έχει μεγαλύτερη τιμή από την ρίζα όταν το στοιχείο που αναζητάμε είναι μεγαλύτερο της ρίζας πραγματοποιούμε την αναζήτηση στο δεξί υποδέντρο
     {
       return search(root->rightchild, key);
     }
-    else
+    else //αντίστοιχα όταν είναι μικρότερο, πραγματοποιούμε την αναζήτηση στο αριστερό υποδέντρο
     {
       return search(root->leftchild, key);
     }
@@ -77,8 +79,8 @@ void BinaryTree::printPostOrder()
     printPostOrder(root);
 }
 
-void BinaryTree::printPostOrder(node *r)
-{
+void BinaryTree::printPostOrder(node *r) //υλοποίηση της μεταδιατεταγμένης διάσχισης δέντρου
+{                                        //ακολουθούμε την σειρά: αριστερό υποδέντρο - δεξί υποδέντρο - ρίζα
     if (r==nullptr)
         return;
  
@@ -99,8 +101,8 @@ void BinaryTree::printInOrder()
   printInOrder(root);
 }
 
-void BinaryTree::printPreOrder(node * r)
-{
+void BinaryTree::printPreOrder(node * r) //υλοποίηση της προδιατεταγμένης διάσχισης δέντρου
+{                                       //ακολουθούμε την σειρά: ρίζα - αριστερό υποδέντρο - δεξί υποδέντρο
   if (r==nullptr)
         return;
 
@@ -111,8 +113,8 @@ void BinaryTree::printPreOrder(node * r)
   printPreOrder(r->rightchild);
 }
 
-void BinaryTree::printInOrder(node * r)
-{
+void BinaryTree::printInOrder(node * r) //υλοποίηση της ενδοδιατεταγμένης διάσχισης δέντρου
+{                                       //ακολουθούμε την σειρά: αριστερό υποδέντρο - ρίζα - δεξί υποδέντρο
   if (r==nullptr)
         return;
 
@@ -143,7 +145,7 @@ node* BinaryTree::remove(node *root,string a)
         root->leftchild = remove(root->leftchild, a);
     else if (a > root->data.value)
         root->rightchild = remove(root->rightchild, a);
-    else 
+    else
     {
         if (root->leftchild==nullptr and root->rightchild==nullptr)
         {
@@ -181,4 +183,16 @@ bool BinaryTree::remove(string a)
     return false;
   }
 }
+
+node* BinaryTree::max(node *r)
+{
+  if(r==nullptr)
+    return nullptr;
+  node *max;
+  max=r;
+  while(max->rightchild!=nullptr)
+    max=max->rightchild;
+  return max;
+}
+
 

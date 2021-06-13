@@ -1,10 +1,17 @@
-#include "Sorted.h"
+#include "Sorted.hpp"
 
 Sorted::Sorted()
 {
   words=new string[1000];
   wordcounter=new int[1000];
   size=0;
+}
+
+Sorted::~Sorted()
+{
+  delete[] words;
+  delete[] wordcounter;
+  size = 0;
 }
 
 void Sorted::remove()
@@ -43,7 +50,7 @@ bool Sorted::moremem(int mem)
 
   words=temp;
   wordcounter = temp2;
-  return true;  
+  return true;
 }
 
 int Sorted::binarysearch(int left,int right,string a)
@@ -104,7 +111,7 @@ void Sorted::insertS(string element_to_insert)
 }
 
 void Sorted::insert(string a)
-{ 
+{
   
   if(uniqueString(a))
   {
@@ -125,3 +132,4 @@ bool Sorted::uniqueString(string a)
     }
   return true;
 }
+

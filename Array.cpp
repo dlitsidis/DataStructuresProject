@@ -1,9 +1,9 @@
-#include "Array.h"
+#include "Array.hpp"
 
 Array::Array()
 {
-   words=nullptr;
-   wordcounter=nullptr;
+   words=new string[1000];
+   wordcounter=new int[1000];
    size=0;
 }
 
@@ -93,3 +93,4 @@ int Array::getwc(int i)
 {
   return wordcounter[i];
 }
+
